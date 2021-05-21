@@ -1,0 +1,257 @@
+﻿@using CitasWebApp.Models
+@model List<ApplicationUser>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link href="@Url.Content("~/Content/dataTables.bootstrap4.min.css")" />
+
+    <link href="@Url.Content("~/Content/alertify.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/themes/default.rtl.min.css")" />
+}
+
+<h5 class="mb-0"><strong>Medicos</strong></h5>
+<span class="text-secondary">Medicos <i class="fa fa-angle-right"></i> Listar</span>
+
+<div class="row mt-3">
+    <div class="col-sm-12">
+        <button type="button" data-toggle="modal" data-target="#exampleModal" data-descripcion="" data-id="0" class="btn btn-outline-info btn-round">Nuevo </button>
+    </div>
+    <div class="col-sm-12">
+        <!--Datatable-->
+        <div class="mt-1 mb-3 p-3 button-container bg-white border shadow-sm">
+            <div class="table-responsive">
+                <table id="tbEspecialidad" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Nombres</th>
+                            <th>Apellidos</th>
+                            <th>Email</th>
+                            <th>Estado</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                            <td>@item.nombres</td>
+                            <td>@item.apellidos</td>
+                            <td>@item.Email</td>
+                            <td>@(item.estado == "1" ?  "Activo" : "Inactivo" ) </td>
+                            <td>
+                                <button type="button" data-toggle="modal" data-target="#exampleModal" data-id="@item.Email" class="btn btn-theme"><i class="fa fa-pencil-square-o"></i> </button>
+                                <button type="button" onclick="deshabilitar('@item.Email','@item.estado');" class="btn btn-@(item.estado == "1" ?  "danger" : "success" )"><i class="fa fa-@(item.estado == "1" ?  "trash" : "check" )"></i> </button>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Doctor</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="bodyModal">
+                        <form>
+                            <input type="hidden" id="idEspecialidad" value="" />
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Descripción:</label>
+                                <input type="text" class="form-control" id="descEspecialidad">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="btnCerrarModal" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="button" id="btnGrabarEditar" class="btn btn-primary">Modificar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/Varying modal content-->
+
+    </div>
+</div>
+
+@section scripts {
+    <script src="@Url.Content("~/Scripts/jquery.dataTables.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/dataTables.bootstrap4.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/alertify.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/sweetalert.js")"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#tbEspecialidad').DataTable({
+                columnDefs: [
+                    { width: '20%', targets: 0 },
+                    { width: '20%', targets: 1 },
+                    { width: '20%', targets: 2 },
+                    { width: '20%', targets: 2 },
+                    { width: '20%', targets: 3 }
+                ],
+                language: {
+                    "decimal": "",
+                    "emptyTable": "No hay información",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                    "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                    "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ Entradas",
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "search": "Buscar:",
+                    "zeroRecords": "Sin resultados encontrados",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+            });
+
+            $("#btnGrabarEditar").button().click(function () {
+                var nombre = $("#txtnombres").val();
+                var apellido = $("#txtapellidos").val();
+                var mail = $("#txtemail").val();
+                var clave = $("#txtpassword").val();
+                var celular = $("#txtcelular").val();
+                var userId = $("#idUser").val();
+
+                $.ajax({
+                    type: "Post", // la variable type guarda el tipo de la peticion GET,POST,..
+                    url: "@Url.Action("Registro", "Doctor")", //url guarda la ruta hacia donde se hace la peticion
+                    data: { Name: nombre, LastName: apellido, Email: mail, Password: clave, Phone: celular, Id: userId }, // data recive un objeto con la informacion que se enviara al servidor
+                    success: function (datos) { //success es una funcion que se utiliza si el servidor retorna informacion
+                        if (datos === "ok") {
+                            $('#btnCerrarModal').trigger('click');
+                            alertify.set('notifier', 'position', 'top-right');
+                            alertify.success('Operación Exitosa.').dismissOthers();
+
+                            $.ajax({
+                                type: "GET", // la variable type guarda el tipo de la peticion GET,POST,..
+                                url: "@Url.Action("Listar", "Doctor")", //url guarda la ruta hacia donde se hace la peticion
+                                success: function (datos) { //success es una funcion que se utiliza si el servidor retorna informacion
+                                    reloadTable2(datos);
+                                }
+                            });
+                        } else {
+                            $("#bodyModal").html(datos);
+                        }
+                    }
+                });
+            });
+
+            $('#exampleModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget); // Button that triggered the modal
+                var id = button.data('id');
+                var vdescripcion = button.data('descripcion');
+
+                $("#bodyModal").load("@Url.Action("Register", "Doctor")" + "?id=" + id);
+
+                if (id == 0) {
+                    $("#btnGrabarEditar").html("Crear");
+                } else {
+                    $("#btnGrabarEditar").html("Modificar");
+                }
+
+                var modal = $(this);
+                modal.find('.modal-body input[type=hidden]').val(id)
+                modal.find('.modal-body input[type=text]').val(vdescripcion)
+            });
+        });
+
+        function deshabilitar(pid, pestado) {
+                $.ajax({
+                    type: "POST", // la variable type guarda el tipo de la peticion GET,POST,..
+                    url: "@Url.Action("Deshabilitar", "Doctor")", //url guarda la ruta hacia donde se hace la peticion
+                    data: { id: pid, estado: pestado }, // data recive un objeto con la informacion que se enviara al servidor
+                    success: function (datos) { //success es una funcion que se utiliza si el servidor retorna informacion
+                        if (datos.operacion) {
+                            alertify.set('notifier', 'position', 'top-right');
+                            alertify.success('Operación Exitosa.').dismissOthers();
+
+                            $.ajax({
+                                type: "GET", // la variable type guarda el tipo de la peticion GET,POST,..
+                                url: "@Url.Action("Listar", "Doctor")", //url guarda la ruta hacia donde se hace la peticion
+                                success: function (datos) { //success es una funcion que se utiliza si el servidor retorna informacion
+                                    reloadTable2(datos);
+                                }
+                            });
+                        }
+                    }
+                });
+        }
+
+        function reloadTable2(json) {
+            var table = $("#tbEspecialidad").dataTable();
+
+            table.fnDestroy();
+            $('#tbEspecialidad tbody > tr').remove();
+
+            for (var i = 0; i < json.data.length; i++) {
+                var estado = "Inactivo";
+                var temaBoton = "success";
+                var imagenBoton = "check";
+                if (json.data[i].estado == "1") {
+                    estado = "Activo";
+                    temaBoton = "danger";
+                    imagenBoton = "trash";
+                }
+                var fila = "<tr><td>" + json.data[i].nombres + "</td><td>" +
+                    json.data[i].apellidos + "</td >" +
+                    "<td>" + json.data[i].Email + "</td>" +
+                    "<td>" + estado + "</td>" +
+                    "<td><button type='button' data-toggle='modal' data-target='#exampleModal' data-id='" + json.data[i].Email +
+                    "' class= 'btn btn-theme' > <i class='fa fa-pencil-square-o'></i> </button >" +
+                    "<button type='button' onclick=\"deshabilitar('" + json.data[i].Email + "'," +
+                    json.data[i].estado + ");\" class='btn btn-" + temaBoton + "'><i class='fa fa-" + imagenBoton + "'></i> </button></td ></tr > "
+
+                $("#tbEspecialidad > tbody")
+                    .append(fila);
+            }
+
+            $('#tbEspecialidad').DataTable({
+                columnDefs: [
+                    { width: '20%', targets: 0 },
+                    { width: '20%', targets: 1 },
+                    { width: '20%', targets: 2 },
+                    { width: '20%', targets: 2 },
+                    { width: '20%', targets: 3 }
+                ],
+                language: {
+                    "decimal": "",
+                    "emptyTable": "No hay información",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                    "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                    "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ Entradas",
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "search": "Buscar:",
+                    "zeroRecords": "Sin resultados encontrados",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+            });
+        }
+    </script>
+}
+
+

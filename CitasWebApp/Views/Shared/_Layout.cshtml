@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!--Meta Responsive tag-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    @Styles.Render("~/Content/css2")
+
+    @RenderSection("Styles", false)
+
+    <title>Sistema de Citas</title>
+</head>
+<body>
+    <!--Page Wrapper-->
+
+    <div class="container-fluid">
+
+        <!--Header-->
+        <div class="row header shadow-sm">
+
+            <!--Logo-->
+            <div class="col-sm-2 pl-0 text-center header-logo">
+                <div class="bg-theme mr-3 pt-3 pb-2 mb-0">
+                    <h3 class="logo"><a href="#" class="text-secondary logo"><i class="fa fa-hospital"></i> CITAS<span class="small">web</span></a></h3>
+                </div>
+            </div>
+            <!--Logo-->
+            <!--Header Menu-->
+            <div class="col-sm-10 header-menu pt-2 pb-0">
+                <div class="row">
+
+                    <!--Menu Icons-->
+                    <div class="col-sm-4 col-8 pl-0">
+                        <!--Toggle sidebar-->
+                        <span class="menu-icon" onclick="toggle_sidebar()">
+                            <span id="sidebar-toggle-btn"></span>
+                        </span>
+                        <!--Toggle sidebar-->
+                    </div>
+                    <!--Menu Icons-->
+                    <!--Search box and avatar-->
+                    <div class="col-sm-8 col-4 text-right flex-header-menu justify-content-end">
+                        <div class="mr-4">
+                            @Html.Partial("_LoginPartial")
+                        </div>
+                    </div>
+                    <!--Search box and avatar-->
+                </div>
+            </div>
+            <!--Header Menu-->
+        </div>
+        <!--Header-->
+        <!--Main Content-->
+
+        <div class="row main-content">
+            <!--Sidebar left-->
+            <div class="col-sm-2 col-xs-6 sidebar pl-0">
+                <div class="inner-sidebar mr-3">
+                    <!--Sidebar Navigation Menu-->
+                    <div class="sidebar-menu-container">
+                        <ul class="sidebar-menu  mb-4">
+
+                            <li class="parent">
+                                <a href="@Url.Action("Index", "Appointment")" class="">
+                                    <i class="fa fa-calendar mr-3"></i>
+                                    <span class="none">Citas </span>
+                                </a>
+                            </li>
+                            @if (Session["TipoUser"].ToString() != "1")
+                            {
+                                <li class="parent">
+                                    <a href="@Url.Action("Index", "Schedule")" class="">
+                                        <i class="fa fa-calendar-times mr-3"></i>
+                                        <span class="none">Horario </span>
+                                    </a>
+                                </li>
+                            }
+
+                            @if (Session["TipoUser"].ToString() == "0")
+                            {
+                                <li class="parent">
+                                <a href="@Url.Action("Index", "Doctor")" class="">
+                                    <i class="fa fa-user mr-3"></i>
+                                    <span class="none">Medicos </span>
+                                </a>
+                                </li>
+                                <li class="parent">
+                                    <a href="@Url.Action("Index", "Patient")" class="">
+                                        <i class="fa fa-user mr-3"></i>
+                                        <span class="none">Pacientes </span>
+                                    </a>
+                                </li>
+                                <li class="parent">
+                                    <a href="@Url.Action("Index", "Specialty")" class="">
+                                        <i class="fa fa-user mr-3"></i>
+                                        <span class="none">Especialidad </span>
+                                    </a>
+                                </li>
+                            }
+                            
+                        </ul>
+                    </div>
+                    <!--Sidebar Naigation Menu-->
+                </div>
+            </div>
+            <!--Sidebar left-->
+            <!--Content right-->
+            <div class="col-sm-10 col-xs-12 content pt-3 pl-0">
+                @RenderBody()
+            </div>
+        </div>
+
+        <!--Main Content-->
+
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    @Scripts.Render("~/bundles/otros")
+</body>
+</html>

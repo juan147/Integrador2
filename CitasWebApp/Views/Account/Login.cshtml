@@ -1,0 +1,56 @@
+﻿@using CitasWebApp.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Iniciar sesión";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+<h1 class="text-center mb-5"><i class="fa fa-hospital text-primary"></i> Sistema de Citas</h1>
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-12 login-box-info">
+        <h3 class="mb-4">Registrarse</h3>
+        <p class="mb-4">Estimado usuario, para poder ingresar a esta plataforma debe útilizar el código de usuario y contraseña que le fue suministrado para este fin, y seguidamente dar clic en el botón continuar. Si no lo tienes haz click abajo</p>
+        <p class="text-center"><a href="Register" class="btn btn-light">Registrate ahora</a></p>
+    </div>
+    <div class="col-md-6 col-sm-6 col-12 login-box-form p-4">
+        <h3 class="mb-2">Ingresar</h3>
+        <small class="text-muted bc-description">Ingresa con tus credenciales de usuario</small>
+        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "mt-2", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-envelope"></i></span>
+                </div>
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control mt-0", placeholder = "Correo" })
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-lock"></i></span>
+                </div>
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control mt-0", placeholder = "Password" })
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                <button class="btn btn-theme btn-block p-2 mb-1">Continuar</button>
+                <a href="#">
+                    <small class="text-theme"><strong>Olvidaste tu clave?</strong></small>
+                </a>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+          
+        });
+    </script>
+}
+
+
