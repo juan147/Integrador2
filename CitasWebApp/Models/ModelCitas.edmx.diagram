@@ -6,6 +6,8 @@
     <edmx:Diagrams>
       <Diagram DiagramId="7a255f5551074f2094108375876a054a" Name="Diagram1">
         <EntityTypeShape EntityType="Model.especialidad" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.doctor" Width="1.5" PointX="3" PointY="0.875" />
+        <AssociationConnector Association="Model.FK__doctores__idEspe__49C3F6B7" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

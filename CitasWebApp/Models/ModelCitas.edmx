@@ -5,6 +5,13 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="doctores">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="idEspecialidad" Type="int" />
+        </EntityType>
         <EntityType Name="especialidades">
           <Key>
             <PropertyRef Name="idEspecialidad" />
@@ -13,8 +20,25 @@
           <Property Name="descripcion" Type="varchar" MaxLength="100" />
           <Property Name="estado" Type="char" MaxLength="1" />
         </EntityType>
+        <Association Name="FK__doctores__idEspe__49C3F6B7">
+          <End Role="especialidades" Type="Self.especialidades" Multiplicity="0..1" />
+          <End Role="doctores" Type="Self.doctores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="especialidades">
+              <PropertyRef Name="idEspecialidad" />
+            </Principal>
+            <Dependent Role="doctores">
+              <PropertyRef Name="idEspecialidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="doctores" EntityType="Self.doctores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="especialidades" EntityType="Self.especialidades" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__doctores__idEspe__49C3F6B7" Association="Self.FK__doctores__idEspe__49C3F6B7">
+            <End Role="especialidades" EntitySet="especialidades" />
+            <End Role="doctores" EntitySet="doctores" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -27,10 +51,36 @@
           <Property Name="idEspecialidad" Type="Int32" Nullable="false" />
           <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="doctores" Relationship="Model.FK__doctores__idEspe__49C3F6B7" FromRole="especialidad" ToRole="doctore" />
         </EntityType>
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="especialidads" EntityType="Model.especialidad" />
+          <EntitySet Name="doctors" EntityType="Model.doctor" />
+          <AssociationSet Name="FK__doctores__idEspe__49C3F6B7" Association="Model.FK__doctores__idEspe__49C3F6B7">
+            <End Role="especialidad" EntitySet="especialidads" />
+            <End Role="doctore" EntitySet="doctors" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="doctor">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="idEspecialidad" Type="Int32" />
+          <NavigationProperty Name="especialidad" Relationship="Model.FK__doctores__idEspe__49C3F6B7" FromRole="doctore" ToRole="especialidad" />
+        </EntityType>
+        <Association Name="FK__doctores__idEspe__49C3F6B7">
+          <End Type="Model.especialidad" Role="especialidad" Multiplicity="1" />
+          <End Type="Model.doctor" Role="doctore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="especialidad">
+              <PropertyRef Name="idEspecialidad" />
+            </Principal>
+            <Dependent Role="doctore">
+              <PropertyRef Name="idEspecialidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -43,6 +93,14 @@
                 <ScalarProperty Name="idEspecialidad" ColumnName="idEspecialidad" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="doctors">
+            <EntityTypeMapping TypeName="Model.doctor">
+              <MappingFragment StoreEntitySet="doctores">
+                <ScalarProperty Name="idEspecialidad" ColumnName="idEspecialidad" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
