@@ -27,5 +27,7 @@ namespace CitasWebApp.Models
     
         public virtual DbSet<doctore> doctores { get; set; }
         public virtual DbSet<especialidade> especialidades { get; set; }
+        public virtual DbSet<hora> horas { get; set; }
+        public virtual DbSet<horario> horarios { get; set; }
     }
 }

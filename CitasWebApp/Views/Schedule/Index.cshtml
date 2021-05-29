@@ -1,4 +1,5 @@
-﻿
+﻿@using CitasWebApp.Models
+@model dynamic
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -15,10 +16,10 @@
                     <div class="col-sm-4">
                         <select class="form-control" id="exampleFormControlSelect1">
                             <option>Seleccionar ...</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                            @foreach (var x in Model.doctores)
+                            {
+                                <option value="@x.Id">@(x.nombres + " " + x.apellidos)</option>
+                            }
                         </select>
                     </div>
                     <div class="col-sm-4">
@@ -49,224 +50,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>07:00 - 07:30</td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                    </tr>
-                    <tr>
-                        <td>07:30 - 08:00</td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                    </tr>
-                    <tr>
-                        <td>08:00 - 08:30</td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                    </tr>
-                    <tr>
-                        <td>08:30 - 09:00</td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                    </tr>
-                    <tr>
-                        <td>09:00 - 09:30</td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                    </tr>
-                    <tr>
-                        <td>09:30 - 10:00</td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                    </tr>
-                    <tr>
-                        <td>10:00 - 10:30</td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                    </tr>
-                    <tr>
-                        <td>10:30 - 11:00</td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                    </tr>
-                    <tr>
-                        <td>11:00 - 11:30</td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                        <td><input type="checkbox" class="js-single" /></td>
-                    </tr>
-                </tbody>
-                <tr>
-                    <td>11:30 - 12:00</td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                </tr>
-                <tr>
-                    <td>12:00 - 12:30</td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                </tr>
-                <tr>
-                    <td>12:30 - 13:00</td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                </tr>
-                <tr>
-                    <td>13:00 - 13:30</td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                </tr>
-                <tr>
-                    <td>13:30 - 14:00</td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                </tr>
-                <tr>
-                    <td>14:00 - 14:30</td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                </tr>
-                <tr>
-                    <td>14:30 - 15:00</td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                </tr>
-                <tr>
-                    <td>15:00 - 15:30</td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                </tr>
-                <tr>
-                    <td>15:30 - 16:00</td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                </tr>
-                <tr>
-                    <td>16:00 - 16:30</td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                </tr>
-                <tr>
-                    <td>16:30 - 17:00</td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                </tr>
-                <tr>
-                    <td>17:00 - 17:30</td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                </tr>
-                <tr>
-                    <td>17:30 - 18:00</td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                </tr>
-                <tr>
-                    <td>18:00 - 18:30</td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                </tr>
-                <tr>
-                    <td>18:30 - 19:00</td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                    <td><input type="checkbox" class="js-single" /></td>
-                </tr>
-                
+                    @foreach (var x in Model.horas)
+                    {
+                        <tr>
+                            <td>@x.desHora</td>
+                            <td><input type="checkbox" class="js-single" /></td>
+                            <td><input type="checkbox" class="js-single" /></td>
+                            <td><input type="checkbox" class="js-single" /></td>
+                            <td><input type="checkbox" class="js-single" /></td>
+                            <td><input type="checkbox" class="js-single" /></td>
+                            <td><input type="checkbox" class="js-single" /></td>
+                        </tr>
+                    }
             </table>
         </div>
         <!--/Varying modal content-->

@@ -1,4 +1,5 @@
-﻿
+﻿@using CitasWebApp.Models
+@model dynamic
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -22,10 +23,10 @@
                     <div class="col-sm-4">
                         <select class="form-control" id="exampleFormControlSelect1">
                             <option>Seleccionar ...</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                            @foreach (var x in Model.doctores)
+                            {
+                                <option value="@x.id">@x.Nombres + " " + x.Apellidos;</option>
+                            }
                         </select>
                     </div>
                     <div class="col-sm-4">

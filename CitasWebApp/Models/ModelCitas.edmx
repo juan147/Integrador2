@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="doctores">
           <Key>
             <PropertyRef Name="id" />
@@ -20,6 +20,27 @@
           <Property Name="descripcion" Type="varchar" MaxLength="100" />
           <Property Name="estado" Type="char" MaxLength="1" />
         </EntityType>
+        <EntityType Name="horarios">
+          <Key>
+            <PropertyRef Name="idHorario" />
+          </Key>
+          <Property Name="idHorario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id" Type="nvarchar" MaxLength="128" />
+          <Property Name="idHora" Type="int" />
+          <Property Name="lunes" Type="char" MaxLength="1" />
+          <Property Name="martes" Type="char" MaxLength="1" />
+          <Property Name="miercoles" Type="char" MaxLength="1" />
+          <Property Name="jueves" Type="char" MaxLength="1" />
+          <Property Name="viernes" Type="char" MaxLength="1" />
+          <Property Name="sabado" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="horas">
+          <Key>
+            <PropertyRef Name="idHora" />
+          </Key>
+          <Property Name="idHora" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="desHora" Type="varchar" MaxLength="20" />
+        </EntityType>
         <Association Name="FK__doctores__idEspe__49C3F6B7">
           <End Role="especialidades" Type="Self.especialidades" Multiplicity="0..1" />
           <End Role="doctores" Type="Self.doctores" Multiplicity="*" />
@@ -32,16 +53,49 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__horarios__id__6383C8BA">
+          <End Role="doctores" Type="Self.doctores" Multiplicity="0..1" />
+          <End Role="horarios" Type="Self.horarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="doctores">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="horarios">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__horarios__idHora__6477ECF3">
+          <End Role="horas" Type="Self.horas" Multiplicity="0..1" />
+          <End Role="horarios" Type="Self.horarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="horas">
+              <PropertyRef Name="idHora" />
+            </Principal>
+            <Dependent Role="horarios">
+              <PropertyRef Name="idHora" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="doctores" EntityType="Self.doctores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="especialidades" EntityType="Self.especialidades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="horarios" EntityType="Self.horarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="horas" EntityType="Self.horas" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__doctores__idEspe__49C3F6B7" Association="Self.FK__doctores__idEspe__49C3F6B7">
             <End Role="especialidades" EntitySet="especialidades" />
             <End Role="doctores" EntitySet="doctores" />
           </AssociationSet>
+          <AssociationSet Name="FK__horarios__id__6383C8BA" Association="Self.FK__horarios__id__6383C8BA">
+            <End Role="doctores" EntitySet="doctores" />
+            <End Role="horarios" EntitySet="horarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__horarios__idHora__6477ECF3" Association="Self.FK__horarios__idHora__6477ECF3">
+            <End Role="horas" EntitySet="horas" />
+            <End Role="horarios" EntitySet="horarios" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -52,6 +106,7 @@
           <Property Name="id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="idEspecialidad" Type="Int32" />
           <NavigationProperty Name="especialidade" Relationship="Self.FK__doctores__idEspe__49C3F6B7" FromRole="doctores" ToRole="especialidades" />
+          <NavigationProperty Name="horarios" Relationship="Model.FK__horarios__id__6383C8BA" FromRole="doctore" ToRole="horario" />
         </EntityType>
         <EntityType Name="especialidade">
           <Key>
@@ -81,7 +136,65 @@
             <End Role="especialidades" EntitySet="especialidades" />
             <End Role="doctores" EntitySet="doctores" />
           </AssociationSet>
+          <EntitySet Name="horas" EntityType="Model.hora" />
+          <EntitySet Name="horarios" EntityType="Model.horario" />
+          <AssociationSet Name="FK__horarios__id__6383C8BA" Association="Model.FK__horarios__id__6383C8BA">
+            <End Role="doctore" EntitySet="doctores" />
+            <End Role="horario" EntitySet="horarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__horarios__idHora__6477ECF3" Association="Model.FK__horarios__idHora__6477ECF3">
+            <End Role="hora" EntitySet="horas" />
+            <End Role="horario" EntitySet="horarios" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="hora">
+          <Key>
+            <PropertyRef Name="idHora" />
+          </Key>
+          <Property Name="idHora" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="desHora" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="horarios" Relationship="Model.FK__horarios__idHora__6477ECF3" FromRole="hora" ToRole="horario" />
+        </EntityType>
+        <EntityType Name="horario">
+          <Key>
+            <PropertyRef Name="idHorario" />
+          </Key>
+          <Property Name="idHorario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="idHora" Type="Int32" />
+          <Property Name="lunes" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="martes" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="miercoles" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="jueves" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="viernes" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="sabado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="doctore" Relationship="Model.FK__horarios__id__6383C8BA" FromRole="horario" ToRole="doctore" />
+          <NavigationProperty Name="hora" Relationship="Model.FK__horarios__idHora__6477ECF3" FromRole="horario" ToRole="hora" />
+        </EntityType>
+        <Association Name="FK__horarios__id__6383C8BA">
+          <End Type="Model.doctore" Role="doctore" Multiplicity="0..1" />
+          <End Type="Model.horario" Role="horario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="doctore">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="horario">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__horarios__idHora__6477ECF3">
+          <End Type="Model.hora" Role="hora" Multiplicity="0..1" />
+          <End Type="Model.horario" Role="horario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hora">
+              <PropertyRef Name="idHora" />
+            </Principal>
+            <Dependent Role="horario">
+              <PropertyRef Name="idHora" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -102,6 +215,29 @@
                 <ScalarProperty Name="idEspecialidad" ColumnName="idEspecialidad" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="horas">
+            <EntityTypeMapping TypeName="Model.hora">
+              <MappingFragment StoreEntitySet="horas">
+                <ScalarProperty Name="desHora" ColumnName="desHora" />
+                <ScalarProperty Name="idHora" ColumnName="idHora" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="horarios">
+            <EntityTypeMapping TypeName="Model.horario">
+              <MappingFragment StoreEntitySet="horarios">
+                <ScalarProperty Name="sabado" ColumnName="sabado" />
+                <ScalarProperty Name="viernes" ColumnName="viernes" />
+                <ScalarProperty Name="jueves" ColumnName="jueves" />
+                <ScalarProperty Name="miercoles" ColumnName="miercoles" />
+                <ScalarProperty Name="martes" ColumnName="martes" />
+                <ScalarProperty Name="lunes" ColumnName="lunes" />
+                <ScalarProperty Name="idHora" ColumnName="idHora" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idHorario" ColumnName="idHorario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

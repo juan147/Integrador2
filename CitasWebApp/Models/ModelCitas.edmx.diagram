@@ -8,6 +8,10 @@
         <EntityTypeShape EntityType="Model.doctore" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.especialidade" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
         <AssociationConnector Association="Model.FK__doctores__idEspe__49C3F6B7" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model.hora" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="Model.horario" Width="1.5" PointX="5.25" PointY="1.625" />
+        <AssociationConnector Association="Model.FK__horarios__id__6383C8BA" />
+        <AssociationConnector Association="Model.FK__horarios__idHora__6477ECF3" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

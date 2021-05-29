@@ -198,6 +198,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\bdHora.cs" />
     <Compile Include="Models\doctore.cs">
       <DependentUpon>ModelCitas.tt</DependentUpon>
     </Compile>
@@ -206,6 +207,12 @@
       <DependentUpon>ModelCitas.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\especialidad_par.cs" />
+    <Compile Include="Models\hora.cs">
+      <DependentUpon>ModelCitas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\horario.cs">
+      <DependentUpon>ModelCitas.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ModelCitas.Context.cs">

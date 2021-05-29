@@ -14,9 +14,17 @@ namespace CitasWebApp.Models
     
     public partial class doctore
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public doctore()
+        {
+            this.horarios = new HashSet<horario>();
+        }
+    
         public string id { get; set; }
         public Nullable<int> idEspecialidad { get; set; }
     
         public virtual especialidade especialidade { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<horario> horarios { get; set; }
     }
 }
