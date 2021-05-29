@@ -6,23 +6,23 @@ using System.Web;
 
 namespace CitasWebApp.Models
 {
-    public partial class especialidad
+    public partial class especialidade
     {
-        public IEnumerable<especialidad> ListarEspecialidades()
+        public IEnumerable<especialidade> ListarEspecialidades()
         {
             Entities db = new Entities();
-            IEnumerable<especialidad> list;
-            list = db.especialidad.ToList();
+            IEnumerable<especialidade> list;
+            list = db.especialidades.ToList();
 
             return list;
         }
 
-        public bool ModificarEspecialidad(especialidad obj)
+        public bool ModificarEspecialidad(especialidade obj)
         {
             bool respuesta = false;
             try {
                 Entities db = new Entities();
-                especialidad vespecialidad = db.especialidad.Find(obj.idEspecialidad);
+                especialidade vespecialidad = db.especialidades.Find(obj.idEspecialidad);
                 vespecialidad.descripcion = obj.descripcion;
                 db.Entry(vespecialidad).State = EntityState.Modified;
                 db.SaveChanges();
@@ -35,18 +35,18 @@ namespace CitasWebApp.Models
             return respuesta;
         }
 
-        public bool CrearEspecialidad(especialidad obj)
+        public bool CrearEspecialidad(especialidade obj)
         {
             bool respuesta = false;
             try
             {
                 Entities db = new Entities();
-                especialidad vespecialidad = new especialidad()
+                especialidade vespecialidad = new especialidade()
                 {
                     descripcion= obj.descripcion,
                     estado="1"
                 };
-                db.especialidad.Add(vespecialidad);
+                db.especialidades.Add(vespecialidad);
                 db.SaveChanges();
                 respuesta = true;
             }
@@ -58,13 +58,13 @@ namespace CitasWebApp.Models
             return respuesta;
         }
 
-        public bool DeshabilitarEspecialidad(especialidad obj)
+        public bool DeshabilitarEspecialidad(especialidade obj)
         {
             bool respuesta = false;
             try
             {
                 Entities db = new Entities();
-                especialidad vespecialidad = db.especialidad.Find(obj.idEspecialidad);
+                especialidade vespecialidad = db.especialidades.Find(obj.idEspecialidad);
                 vespecialidad.estado = obj.estado;
                 db.Entry(vespecialidad).State = EntityState.Modified;
                 db.SaveChanges();

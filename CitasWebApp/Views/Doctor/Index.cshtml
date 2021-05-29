@@ -127,11 +127,12 @@
                 var clave = $("#txtpassword").val();
                 var celular = $("#txtcelular").val();
                 var userId = $("#idUser").val();
+                var idEspe = $("#cboEspecialidad").val();
 
                 $.ajax({
                     type: "Post", // la variable type guarda el tipo de la peticion GET,POST,..
                     url: "@Url.Action("Registro", "Doctor")", //url guarda la ruta hacia donde se hace la peticion
-                    data: { Name: nombre, LastName: apellido, Email: mail, Password: clave, Phone: celular, Id: userId }, // data recive un objeto con la informacion que se enviara al servidor
+                    data: { Name: nombre, LastName: apellido, Email: mail, Password: clave, Phone: celular, Id: userId, IdEspecialidad: idEspe }, // data recive un objeto con la informacion que se enviara al servidor
                     success: function (datos) { //success es una funcion que se utiliza si el servidor retorna informacion
                         if (datos === "ok") {
                             $('#btnCerrarModal').trigger('click');

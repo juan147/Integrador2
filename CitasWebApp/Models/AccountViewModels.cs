@@ -88,6 +88,7 @@ namespace CitasWebApp.Models
         public string Password { get; set; }
 
         public string Id { get; set; }
+        public int? IdEspecialidad { get; set; }
 
     }
 

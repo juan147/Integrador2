@@ -12,8 +12,8 @@ namespace CitasWebApp.Models
         public string idTipo { get; set; }
         public string nombres { get; set; }
         public string apellidos { get; set; }
-
         public string estado { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Tenga en cuenta que el valor de authenticationType debe coincidir con el definido en CookieAuthenticationOptions.AuthenticationType

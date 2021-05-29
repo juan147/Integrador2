@@ -11,13 +11,13 @@ namespace CitasWebApp.Controllers
 {
     public class SpecialtyController : Controller
     {
-        especialidad objEspecialidad = new especialidad();
+        especialidade objEspecialidad = new especialidade();
 
         // GET: Specialty
         public ActionResult Index()
         {
             
-            IEnumerable<especialidad> list= objEspecialidad.ListarEspecialidades();
+            IEnumerable<especialidade> list= objEspecialidad.ListarEspecialidades();
 
             return View(list);
         }
@@ -58,7 +58,7 @@ namespace CitasWebApp.Controllers
         [HttpGet]
         public JsonResult Listar()
         {
-            IEnumerable<especialidad> list = objEspecialidad.ListarEspecialidades();
+            IEnumerable<especialidade> list = objEspecialidad.ListarEspecialidades();
 
             return Json(new { data = list }, JsonRequestBehavior.AllowGet);
 

@@ -7,13 +7,17 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System.Web.Mvc;
 using System.Threading.Tasks;
+using System.Dynamic;
 
 namespace CitasWebApp.Controllers
 {
+    [Authorize]
     public class DoctorController : Controller
     {
         private ApplicationUserManager _userManager;
         private ApplicationSignInManager _signInManager;
+        private doctore _doctor;
+        private especialidade _especialidad;
 
         public ApplicationUserManager UserManager
         {
@@ -51,13 +55,26 @@ namespace CitasWebApp.Controllers
         [HttpGet]
         public ActionResult Register(string id)
         {
+            _especialidad = new especialidade();
+            _doctor = new doctore();
+            dynamic mymodel = new ExpandoObject();
             ApplicationUser user = new ApplicationUser();
-            if (id != "0")
+            if (id != null &&  id != "0")
             {
                 user = UserManager.FindByEmail(id);
+                _doctor = _doctor.ObtenerDoctor(user.Id);
             }
-            
-            return PartialView(user);
+            mymodel.user = new RegisterViewModel
+            {
+                Email=user.Email,
+                Name=user.UserName,
+                LastName=user.apellidos,
+                Phone=user.PhoneNumber,
+                IdEspecialidad=_doctor.idEspecialidad
+            };
+            mymodel.specialty = _especialidad.ListarEspecialidades();
+
+            return PartialView(mymodel);
         }
 
         [HttpPost]
@@ -106,8 +123,12 @@ namespace CitasWebApp.Controllers
                     if (result.Succeeded)
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
-                        return Content("ok");
+                        var _user = await UserManager.FindByNameAsync(model.Email);
+                        _doctor = new doctore();
+                        _doctor.id = _user.Id;
+                        _doctor.idEspecialidad = model.IdEspecialidad;
+                        _doctor.CrearDoctor(_doctor);
+                    return Content("ok");
                     }
                     AddErrors(result);
                 }

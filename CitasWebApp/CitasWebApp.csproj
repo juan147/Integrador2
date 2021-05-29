@@ -198,6 +198,13 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\doctore.cs">
+      <DependentUpon>ModelCitas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\doctor_par.cs" />
+    <Compile Include="Models\especialidade.cs">
+      <DependentUpon>ModelCitas.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\especialidad_par.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -373,10 +380,10 @@
     <Content Include="Views\Doctor\Register.cshtml" />
     <Content Include="Views\Patient\Index.cshtml" />
     <Content Include="Views\Patient\Register.cshtml" />
+    <Content Include="Views\Schedule\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Schedule\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="font\glyphicons-halflings-regular.woff2" />

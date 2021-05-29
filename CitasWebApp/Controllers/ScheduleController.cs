@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace CitasWebApp.Controllers
 {
+    [Authorize]
     public class ScheduleController : Controller
     {
         // GET: Schedule
