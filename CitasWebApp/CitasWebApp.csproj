@@ -199,14 +199,15 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\bdHora.cs" />
+    <Compile Include="Models\bdHorario.cs" />
     <Compile Include="Models\doctore.cs">
       <DependentUpon>ModelCitas.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\doctor_par.cs" />
+    <Compile Include="Models\bdDoctor.cs" />
     <Compile Include="Models\especialidade.cs">
       <DependentUpon>ModelCitas.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\especialidad_par.cs" />
+    <Compile Include="Models\bdEspecialidad.cs" />
     <Compile Include="Models\hora.cs">
       <DependentUpon>ModelCitas.tt</DependentUpon>
     </Compile>
@@ -232,6 +233,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\HorarioViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\alertify.min.css" />

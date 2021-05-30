@@ -1,4 +1,5 @@
 ﻿using CitasWebApp.Models;
+using CitasWebApp.ViewModels;
 using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace CitasWebApp.Controllers
     public class ScheduleController : Controller
     {
         hora _hora= new hora();
+        horario _horario = new horario();
         private ApplicationUserManager _userManager;
 
         public ApplicationUserManager UserManager
@@ -36,6 +38,27 @@ namespace CitasWebApp.Controllers
             mymodel.horas = horas;
 
             return View(mymodel);
+        }
+
+        [HttpPost]
+        public JsonResult Modificar(HorarioViewModel obj)
+        {
+
+            bool respuesta = false;
+            respuesta = _horario.GrabarHorario_x_Medico(new horario
+            {
+                id=obj.IdDoctor,
+                idHora=obj.IdHora,
+                lunes=obj.Lunes,
+                martes=obj.Martes,
+                miercoles=obj.Miercoles,
+                jueves=obj.Jueves,
+                viernes=obj.Viernes,
+                sabado=obj.Sabado
+            });
+
+            return Json(new { operacion = respuesta, errMsg = "" });
+
         }
     }
 }
