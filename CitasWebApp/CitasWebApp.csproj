@@ -175,6 +175,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="Controllers\SpecialtyController.cs" />
     <Compile Include="Global.asax.cs">
@@ -305,12 +306,23 @@
     <Content Include="font\weathericons-regular-webfont.ttf" />
     <Content Include="font\weathericons-regular-webfont.woff" />
     <Content Include="font\weathericons-regular-webfont.woff2" />
+    <Content Include="Scripts\chart.min.js" />
+    <Content Include="Scripts\chartist-data.js" />
+    <Content Include="Scripts\chartist.min.js" />
     <Content Include="Scripts\dataTables.bootstrap4.min.js" />
+    <Content Include="Scripts\demo.js" />
     <Content Include="Scripts\fullcalender\full-calendar.js" />
     <Content Include="Scripts\fullcalender\fullcalendar.min.js" />
     <Content Include="Scripts\fullcalender\locale-all.js" />
     <Content Include="Scripts\fullcalender\moment.min.js" />
     <Content Include="Scripts\jquery.dataTables.min.js" />
+    <Content Include="Scripts\jquery.flot.categories.min.js" />
+    <Content Include="Scripts\jquery.flot.min.js" />
+    <Content Include="Scripts\jquery.flot.pie.min.js" />
+    <Content Include="Scripts\jquery.flot.stack.min.js" />
+    <Content Include="Scripts\morris.js" />
+    <Content Include="Scripts\raphael.min.js" />
+    <Content Include="Scripts\sparkline.min.js" />
     <Content Include="Scripts\sweetalert.js" />
     <Content Include="webfonts\fa-brands-400.svg" />
     <Content Include="webfonts\fa-regular-400.svg" />
@@ -390,6 +402,7 @@
     <Content Include="Views\Patient\Index.cshtml" />
     <Content Include="Views\Patient\Register.cshtml" />
     <Content Include="Views\Schedule\Index.cshtml" />
+    <Content Include="Views\Report\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

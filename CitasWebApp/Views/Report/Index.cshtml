@@ -1,0 +1,139 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h5 class="mb-3"><strong>Dashboard</strong></h5>
+
+<!--Dashboard widget-->
+<div class="mt-1 mb-3 button-container">
+    <div class="row pl-0">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-12 mb-3">
+            <div class="bg-white border shadow">
+                <div class="p-2 text-center">
+                    <h5 class="mb-0 mt-2 text-theme"><small><strong>CITAS PROMEDIO DIA</strong></small></h5>
+                    <h1>45</h1>
+                </div>
+                <div class="align-bottom">
+                    <span id="incomeBar"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-4 col-sm-6 col-12 mb-3">
+            <div class="bg-white border shadow">
+                <div class="p-2 text-center">
+                    <h5 class="mb-0 mt-2 text-danger"><small><strong>CITAS PROMEDIO MES</strong></small></h5>
+                    <h1>1200</h1>
+                </div>
+                <div class="align-bottom">
+                    <span id="expensesBar"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-4 col-sm-6 col-12 mb-3">
+            <div class="bg-white border shadow">
+                <div class="p-2 text-center">
+                    <h5 class="mb-0 mt-2 text-green"><small><strong>CITAS ANULADAS MES</strong></small></h5>
+                    <h1>20</h1>
+                </div>
+                <div class="align-bottom">
+                    <span id="profitBar"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/Dashboard widget-->
+
+<div class="row">
+    <div class="col-sm-12 col-md-8">
+        <!--Analytics-->
+        <div class="mt-1 mb-3 p-3 button-container bg-white shadow-sm border">
+            <h6 class="mb-3">Citas por Año</h6><hr>
+
+            <canvas id="orderRevenue" class="orderRevenue" height="120px"></canvas>
+
+        </div>
+        <!--/Analytics-->
+
+    </div>
+</div>
+
+<!--Custom cards section-->
+<div class="row">
+    <!--Visitors statistics card-->
+    <div class="col-sm-4 custom-card">
+        <div class="mt-1 mb-3 button-container p-3 bg-white border shadow lh-sm">
+            <div class="text-center mb-3">
+                <h5 class="mb-0 mt-2"><small>Pacientes</small></h5>
+                <h2>58</h2>
+            </div>
+
+            <svg viewBox="0 0 36 25" class="circular-chart blue">
+                <path class="circle-bg"
+                      d="M18 2.0845
+                                    a 7.9567 7.9567 0 0 1 0 15.9134
+                                    a 7.9567 7.9567 0 0 1 0 -15.9134" />
+                <path class="circle"
+                      stroke-dasharray="40, 60"
+                      d="M18 2.0845
+                                    a 7.9567 7.9567 0 0 1 0 15.9134
+                                    a 7.9567 7.9567 0 0 1 0 -15.9134" />
+                <text x="18" y="12.00" class="percentage">&#xf0c0;</text>
+            </svg>
+        </div>
+    </div>
+    <!--/Visitors statistics card-->
+    <!--Transaction statistics card-->
+    <div class="col-sm-4 custom-card">
+        <div class="mt-1 mb-3 button-container p-3 bg-white border shadow lh-sm">
+            <div class="text-center mb-3">
+                <h5 class="mb-0 mt-2"><small>Medicos</small></h5>
+                <h2>15</h2>
+            </div>
+
+            <svg viewBox="0 0 36 25" class="circular-chart red">
+                <path class="circle-bg"
+                      d="M18 2.0845
+                                    a 7.9567 7.9567 0 0 1 0 15.9134
+                                    a 7.9567 7.9567 0 0 1 0 -15.9134" />
+                <path class="circle"
+                      stroke-dasharray="40, 60"
+                      d="M18 2.0845
+                                    a 7.9567 7.9567 0 0 1 0 15.9134
+                                    a 7.9567 7.9567 0 0 1 0 -15.9134" />
+                <text x="18" y="12.00" class="percentage">&#xf1ed;</text>
+            </svg>
+        </div>
+    </div>
+    <!--/Transaction statistics card-->
+    
+</div>
+<!--Custom cards Section-->
+
+
+
+@section scripts {
+    <script src="@Url.Content("~/Scripts/jquery.flot.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.flot.pie.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.flot.categories.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.flot.stack.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/sparkline.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/raphael.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/morris.js")"></script>
+    <script src="@Url.Content("~/Scripts/chart.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/chartist.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/chartist-data.js")"></script>
+    <script src="@Url.Content("~/Scripts/demo.js")"></script>
+
+
+    <script>
+        $(document).ready(function () {
+
+        });
+    </script>
+}
+
